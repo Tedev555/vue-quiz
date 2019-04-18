@@ -4,7 +4,11 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col sm="6" offset="3">
-          <QuestionBox/>
+          <QuestionBox
+            v-if="questions.length"
+            :currentQuestion="questions[index]"
+            :next="next"
+          />
         </b-col>
       </b-row>
     </b-container>
@@ -14,7 +18,7 @@
 <script>
 import Header from './components/Header.vue'
 import QuestionBox from './components/QuestionBox.vue'
-import fetch, { Response } from 'node-fetch';
+// import fetch, { Response } from 'node-fetch';
 
 export default {
   name: 'app',
@@ -24,7 +28,13 @@ export default {
   },
   data() {
     return {
-      questions: []
+      questions: [],
+      index: 0
+    }
+  },
+  methods: {
+    next() {
+      this.index++
     }
   },
   mounted: function() {
@@ -33,7 +43,7 @@ export default {
     }).then( (response) => {
       return response.json();
     }).then( (jsonData) => {
-      this.questions = jsonData.results;
+      this.questions = jsonData.results;      
     });
   }
 }

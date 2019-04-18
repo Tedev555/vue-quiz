@@ -1,8 +1,8 @@
 <template>
     <div class="question-box-container">
-        <b-jumbotron>
+        <b-jumbotron> 
             <template slot="lead">
-                Some Question is here?
+                {{ currentQuestion.question}}
             </template>
 
             <hr class="my-4">
@@ -12,7 +12,18 @@
             </p>
 
             <b-button variant="primary" href="#">Submiy</b-button>
-            <b-button variant="success" href="#">Next</b-button>
+            <b-button @click="next" variant="success" href="#">
+                Next
+            </b-button>
         </b-jumbotron>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        currentQuestion: Object,
+        next: Function
+    }
+}
+</script>
